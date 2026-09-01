@@ -1,11 +1,793 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Shiksha</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#2563eb" />
+  <meta
+    name="description"
+    content="Smart Shiksha Web Portal - An innovative education platform currently under development."
+  />
+
+  <title>Smart Shiksha | Coming Soon</title>
+
+  <style>
+    /* =========================
+       RESET & GLOBAL STYLES
+    ========================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      min-height: 100vh;
+      color: #172033;
+      background: #f8fbff;
+      overflow-x: hidden;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================== */
+    .page {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(37, 99, 235, 0.12),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 80%,
+          rgba(14, 165, 233, 0.12),
+          transparent 30%
+        ),
+        #f8fbff;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px);
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .blob-one {
+      width: 250px;
+      height: 250px;
+      background: rgba(37, 99, 235, 0.08);
+      top: -100px;
+      right: -70px;
+    }
+
+    .blob-two {
+      width: 180px;
+      height: 180px;
+      background: rgba(14, 165, 233, 0.08);
+      bottom: -60px;
+      left: -50px;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+    header {
+      width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+
+    .navbar {
+      width: min(1200px, 92%);
+      margin: auto;
+      padding: 24px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #172033;
+    }
+
+    .brand-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 22px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+      box-shadow: 0 10px 25px rgba(37, 99, 235, 0.2);
+    }
+
+    .brand-text {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      color: #166534;
+      background: #dcfce7;
+      border: 1px solid #bbf7d0;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 5px rgba(34, 197, 94, 0.12);
+      animation: pulse 2s infinite;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+    main {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero {
+      width: min(1200px, 92%);
+      margin: 0 auto;
+      padding: 60px 0 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .hero-content {
+      animation: fadeUp 0.8s ease both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      margin-bottom: 22px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid #dbeafe;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 8px 25px rgba(30, 64, 175, 0.06);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.02;
+      letter-spacing: -3px;
+      color: #111827;
+      margin-bottom: 24px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #2563eb, #0891b2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .description {
+      max-width: 650px;
+      font-size: clamp(16px, 2vw, 19px);
+      line-height: 1.7;
+      color: #64748b;
+      margin-bottom: 32px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-height: 48px;
+      padding: 13px 22px;
+      border-radius: 12px;
+      border: none;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: 750;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      color: white;
+      background: #2563eb;
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      background: #1d4ed8;
+      box-shadow: 0 16px 30px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-secondary {
+      color: #334155;
+      background: white;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-2px);
+      border-color: #bfdbfe;
+      background: #f8fbff;
+    }
+
+    /* =========================
+       ILLUSTRATION CARD
+    ========================== */
+    .visual {
+      display: flex;
+      justify-content: center;
+      animation: fadeUp 0.8s 0.15s ease both;
+    }
+
+    .portal-card {
+      width: min(430px, 100%);
+      position: relative;
+      padding: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 30px 70px rgba(30, 64, 175, 0.13),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .mini-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .mini-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: white;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2563eb, #06b6d4);
+    }
+
+    .mini-title {
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .mini-subtitle {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    .menu-dots {
+      color: #94a3b8;
+      font-size: 20px;
+    }
+
+    .progress-box {
+      padding: 22px;
+      border-radius: 20px;
+      background: linear-gradient(145deg, #eff6ff, #ecfeff);
+      border: 1px solid #dbeafe;
+      text-align: center;
+    }
+
+    .cap {
+      width: 82px;
+      height: 82px;
+      margin: 0 auto 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      font-size: 37px;
+      background: white;
+      box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12);
+    }
+
+    .progress-box h2 {
+      font-size: 22px;
+      color: #172033;
+      margin-bottom: 8px;
+    }
+
+    .progress-box p {
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      height: 10px;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: #dbeafe;
+    }
+
+    .progress-fill {
+      width: 68%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #2563eb, #06b6d4);
+      animation: loading 2.2s ease-in-out infinite alternate;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .feature {
+      padding: 14px 8px;
+      border-radius: 14px;
+      text-align: center;
+      background: white;
+      border: 1px solid #eef2f7;
+    }
+
+    .feature-icon {
+      font-size: 19px;
+      margin-bottom: 5px;
+    }
+
+    .feature span {
+      display: block;
+      font-size: 10px;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    /* =========================
+       INFO STRIP
+    ========================== */
+    .info-strip {
+      width: min(1200px, 92%);
+      margin: 0 auto 30px;
+      position: relative;
+      z-index: 3;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .info-strip strong {
+      color: #2563eb;
+      margin-right: 5px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    footer {
+      position: relative;
+      z-index: 3;
+      padding: 22px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 12px;
+    }
+
+    /* =========================
+       ANIMATIONS
+    ========================== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+      }
+    }
+
+    @keyframes loading {
+      from {
+        width: 55%;
+      }
+
+      to {
+        width: 72%;
+      }
+    }
+
+    /* =========================
+       TABLET
+    ========================== */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 45px;
+        padding-top: 40px;
+      }
+
+      .hero-content {
+        text-align: center;
+      }
+
+      .description {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .visual {
+        order: 2;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 600px) {
+      .navbar {
+        padding: 17px 0;
+      }
+
+      .brand-logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 11px;
+        font-size: 19px;
+      }
+
+      .brand-text {
+        font-size: 16px;
+      }
+
+      .status {
+        padding: 7px 10px;
+        font-size: 11px;
+      }
+
+      .hero {
+        width: 90%;
+        padding: 38px 0 45px;
+        gap: 35px;
+      }
+
+      .eyebrow {
+        font-size: 11px;
+        margin-bottom: 17px;
+      }
+
+      h1 {
+        font-size: clamp(38px, 13vw, 55px);
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+      }
+
+      .description {
+        font-size: 15px;
+        line-height: 1.65;
+        margin-bottom: 25px;
+      }
+
+      .buttons {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .portal-card {
+        padding: 17px;
+        border-radius: 22px;
+      }
+
+      .progress-box {
+        padding: 20px 14px;
+      }
+
+      .cap {
+        width: 70px;
+        height: 70px;
+        font-size: 31px;
+      }
+
+      .progress-box h2 {
+        font-size: 19px;
+      }
+
+      .features {
+        gap: 7px;
+      }
+
+      .feature {
+        padding: 11px 5px;
+      }
+
+      .info-strip {
+        width: 90%;
+        margin-bottom: 10px;
+        padding: 15px;
+        font-size: 11px;
+      }
+
+      footer {
+        padding: 18px 12px;
+      }
+    }
+
+    /* =========================
+       VERY SMALL SCREENS
+    ========================== */
+    @media (max-width: 360px) {
+      .status {
+        display: none;
+      }
+
+      .brand-text {
+        font-size: 15px;
+      }
+
+      h1 {
+        font-size: 37px;
+      }
+
+      .portal-card {
+        padding: 13px;
+      }
+    }
+
+    /* =========================
+       ACCESSIBILITY
+    ========================== */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
+
 <body>
-    
+  <div class="page">
+
+    <!-- Decorative background -->
+    <div class="blob blob-one"></div>
+    <div class="blob blob-two"></div>
+
+    <!-- Header -->
+    <header>
+      <nav class="navbar">
+
+        <a href="#" class="brand" aria-label="Smart Shiksha Home">
+          <div class="brand-logo">S</div>
+          <span class="brand-text">Smart Shiksha</span>
+        </a>
+
+        <div class="status">
+          <span class="status-dot"></span>
+          Under Progress
+        </div>
+
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+      <section class="hero">
+
+        <!-- Left Content -->
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            🎓 Building the Future of Education
+          </div>
+
+          <h1>
+            Smart Learning.<br />
+            <span class="gradient-text">Smarter Future.</span>
+          </h1>
+
+          <p class="description">
+            The <strong>Smart Shiksha Web Portal</strong> is currently
+            under development. We're creating a modern digital learning
+            experience designed to make education smarter, simpler,
+            and more accessible.
+          </p>
+
+          <div class="buttons">
+            <a href="#progress" class="btn btn-primary">
+              🚀 View Progress
+            </a>
+
+            <a href="mailto:info@smartshiksha.com" class="btn btn-secondary">
+              ✉️ Contact Us
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Illustration -->
+        <div class="visual" id="progress">
+
+          <div class="portal-card">
+
+            <div class="card-header">
+
+              <div class="mini-brand">
+                <div class="mini-icon">S</div>
+
+                <div>
+                  <div class="mini-title">
+                    Smart Shiksha
+                  </div>
+
+                  <div class="mini-subtitle">
+                    Education Portal
+                  </div>
+                </div>
+              </div>
+
+              <div class="menu-dots">•••</div>
+
+            </div>
+
+            <div class="progress-box">
+
+              <div class="cap">🎓</div>
+
+              <h2>Portal Under Progress</h2>
+
+              <p>
+                Our team is working hard to bring you an
+                engaging and powerful learning platform.
+              </p>
+
+              <div
+                class="progress-bar"
+                role="progressbar"
+                aria-label="Development progress"
+                aria-valuenow="68"
+                aria-valuemin="0"
+                aria-valuemax="100"
+              >
+                <div class="progress-fill"></div>
+              </div>
+
+            </div>
+
+            <div class="features">
+
+              <div class="feature">
+                <div class="feature-icon">📚</div>
+                <span>Learning</span>
+              </div>
+
+              <div class="feature">
+                <div class="feature-icon">💡</div>
+                <span>Innovation</span>
+              </div>
+
+              <div class="feature">
+                <div class="feature-icon">🌐</div>
+                <span>Connected</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
+    <!-- Info -->
+    <div class="info-strip">
+      <span>
+        <strong>Coming Soon:</strong>
+        A smarter digital education experience is on its way.
+      </span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © <span id="year"></span> Smart Shiksha Web Portal.
+      All rights reserved.
+    </footer>
+
+  </div>
+
+  <script>
+    // Automatically update copyright year
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+  </script>
 </body>
 </html>
